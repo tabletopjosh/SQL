@@ -36,8 +36,49 @@ VALUES
   ('Jane', 'Smith', 'jane.smith@example.com', 8),
   ('Michael', 'Johnson', 'michael.johnson@example.com', 15);
 
+-- Create the third table with at least 4 fields
+CREATE TABLE clients (
+  client_id INT AUTO_INCREMENT PRIMARY KEY,
+  client_name VARCHAR(50) NOT NULL,
+  contact_number VARCHAR(15),
+  email VARCHAR(50) UNIQUE NOT NULL,
+  address VARCHAR(100)
+);
+
+-- Populate the clients table with at least 3 rows of data
+INSERT INTO clients (client_name, contact_number, email, address)
+VALUES
+  ('Global Corp', '123-456-7890', 'contact@globalcorp.com', '123 Global St, City, Country'),
+  ('Home Builders Inc.', '234-567-8901', 'info@homebuilders.com', '456 Home St, City, Country'),
+  ('Retail World', '345-678-9012', 'support@retailworld.com', '789 Retail St, City, Country');
+
+-- Create the fourth table with at least 4 fields
+CREATE TABLE project_assignments (
+  assignment_id INT AUTO_INCREMENT PRIMARY KEY,
+  project_id INT,
+  architect_id INT,
+  client_id INT,
+  assignment_date DATE,
+  FOREIGN KEY (project_id) REFERENCES projects(project_id),
+  FOREIGN KEY (architect_id) REFERENCES architects(architect_id),
+  FOREIGN KEY (client_id) REFERENCES clients(client_id)
+);
+
+-- Populate the project_assignments table with at least 3 rows of data
+INSERT INTO project_assignments (project_id, architect_id, client_id, assignment_date)
+VALUES
+  (1, 1, 1, '2022-01-01'),
+  (2, 2, 2, '2021-05-15'),
+  (3, 3, 3, '2023-03-01');
+
 -- Describe the structure of the projects table
 DESCRIBE projects;
 
 -- Describe the structure of the architects table
 DESCRIBE architects;
+
+-- Describe the structure of the clients table
+DESCRIBE clients;
+
+-- Describe the structure of the project_assignments table
+DESCRIBE project_assignments;
